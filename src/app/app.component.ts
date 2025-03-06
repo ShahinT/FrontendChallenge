@@ -15,6 +15,7 @@ import { CountdownComponent } from "./components/countdown/countdown.component";
 export class AppComponent implements OnInit {
   private countdownService = inject(CountdownService);
 
+  /** Acting like it is a fetch call from a database **/
   ngOnInit() {
     this.countdownService.fetchCounter();
   }

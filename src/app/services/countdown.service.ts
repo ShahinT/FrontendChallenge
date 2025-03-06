@@ -1,4 +1,4 @@
-import { ICountDown, ITimeRemaining } from "../interfaces/Time";
+import { ICountDown, ITimeRemaining } from "@/interfaces/Time";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, interval, map, Subscription, takeWhile } from "rxjs";
 
@@ -8,6 +8,9 @@ export class CountdownService {
   private sub!: Subscription;
 
   countDown$ = new BehaviorSubject<ICountDown | null>(null);
+  eventName$ = this.countDown$.pipe(
+    map((countDown) => countDown?.eventName ?? null),
+  );
   remainingTime$ = new BehaviorSubject<ITimeRemaining>({
     seconds: 0,
     days: 0,
@@ -34,6 +37,7 @@ export class CountdownService {
     return countDown ? new Date(countDown.endDate).getTime() - Date.now() : 0;
   }
 
+  /** sub starts providing its subscribers the remaining time in form of ITimeRemaining **/
   startCountdown(): void {
     const countDown: ICountDown | null = this.countDown$.value;
     if (!countDown || !countDown.endDate) {
@@ -55,6 +59,7 @@ export class CountdownService {
     });
   }
 
+  /** Fetching countdown from storage if available  **/
   fetchCounter() {
     const storedCountDown: string | null = localStorage.getItem(
       this.COUNT_DOWN_KEY,

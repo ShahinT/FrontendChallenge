@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from "@angular/core";
-import { CountdownService } from "../../services/countdown.service";
+import { CountdownService } from "@/services/countdown.service";
 import { CountdownFormComponent } from "./countdown-form/countdown-form.component";
 import { CountdownDisplayComponent } from "./countdown-display/countdown-display.component";
-import { ICountDown } from "../../interfaces/Time";
+import { ICountDown } from "@/interfaces/Time";
 
 @Component({
   selector: "app-countdown",

@@ -5,9 +5,9 @@
       <h1>Event has passed</h1>
     </div>
     <ng-template #remainingTimeTemp>
-      <ng-container *ngIf="countDown$ | async as countDown">
+      <ng-container *ngIf="eventName$ | async as eventName">
         <div class="pt-6 event-title" appFitText [group]="'titleGroup'">
-          Time to {{ countDown.eventName }}
+          Time to {{ eventName }}
         </div>
       </ng-container>
       <div class="box-container">

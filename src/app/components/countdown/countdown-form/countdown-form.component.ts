@@ -1,8 +1,8 @@
 import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { CountdownService } from "../../../services/countdown.service";
+import { CountdownService } from "@/services/countdown.service";
 import { CommonModule } from "@angular/common";
-import { ICountDown } from "../../../interfaces/Time";
+import { ICountDown } from "@/interfaces/Time";
 
 @Component({
   selector: "app-countdown-form",

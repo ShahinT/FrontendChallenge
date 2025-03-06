@@ -1,10 +1,17 @@
+/**
+ * This component displays a countdown timer.
+ * It subscribes to a eventName from countdown
+ * and updates the remaining time dynamically.
+ */
+
 import { Component, inject, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CountdownService } from "../../../services/countdown.service";
-import { IBox, ICountDown, ITimeRemaining } from "../../../interfaces/Time";
+import { CountdownService } from "@/services/countdown.service";
+
+import { IBox, ITimeRemaining } from "@/interfaces/Time";
 import { Observable, Subscription } from "rxjs";
-import { FitTextDirective } from "../../../directive/fit-text.directive";
-import { COUNT_DOWN_BOXES } from "../../../data";
+import { FitTextDirective } from "@/directive/fit-text.directive";
+import { COUNT_DOWN_BOXES } from "@/data";
 
 @Component({
   selector: "app-countdown-display",
@@ -19,10 +26,14 @@ export class CountdownDisplayComponent implements OnDestroy {
   remainingTime!: ITimeRemaining;
   isPassed: boolean = false;
   protected readonly boxes: IBox[] = COUNT_DOWN_BOXES;
-  countDown$: Observable<ICountDown | null>;
+  eventName$: Observable<string | null>;
 
+  /**
+   * Initializes the component by subscribing to the eventName.
+   * Starts the countdown if it's still running; otherwise, marks it as passed.
+   */
   constructor() {
-    this.countDown$ = this.countdownService.countDown$;
+    this.eventName$ = this.countdownService.eventName$;
     this.remainingTimeSubscription =
       this.countdownService.remainingTime$.subscribe((time: ITimeRemaining) => {
         this.remainingTime = time;
