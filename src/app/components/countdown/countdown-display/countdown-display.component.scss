@@ -1,0 +1,40 @@
+.event-title {
+  color: #72035D;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+.pt-6 {
+  margin-top: 40px;
+}
+
+.pb-1 {
+  padding-bottom: 10px
+}
+
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  gap: .5rem;
+  padding: 1rem;
+}
+
+.box {
+  background-color: var(--card-bg);
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

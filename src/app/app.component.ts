@@ -1,13 +1,21 @@
-import { Component } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
+import { Component, inject, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { CountdownService } from "./services/countdown.service";
+import { CountdownComponent } from "./components/countdown/countdown.component";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  imports: [CommonModule, FormsModule, CountdownComponent],
+  templateUrl: "./app.component.html",
+  styleUrl: "app.component.scss",
+  providers: [CountdownService],
 })
-export class AppComponent {
-  title = 'FrontendChallenge'
+export class AppComponent implements OnInit {
+  private countdownService = inject(CountdownService);
+
+  ngOnInit() {
+    this.countdownService.fetchCounter();
+  }
 }

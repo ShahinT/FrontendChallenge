@@ -1,0 +1,31 @@
+<div *ngIf="isLoading && !isPassed; else timerTemplate" class="spinner"></div>
+<ng-template #timerTemplate>
+  <div class="wrapper">
+    <div *ngIf="isPassed; else remainingTimeTemp" class="event-title">
+      <h1>Event has passed</h1>
+    </div>
+    <ng-template #remainingTimeTemp>
+      <ng-container *ngIf="countDown$ | async as countDown">
+        <div class="pt-6 event-title" appFitText [group]="'titleGroup'">
+          Time to {{ countDown.eventName }}
+        </div>
+      </ng-container>
+      <div class="box-container">
+        <ng-container *ngFor="let box of boxes">
+          <div class="box">
+            <div class="content">
+              <div appFitText [group]="'timerGroup'">
+                {{ remainingTime[box.key] }}
+                <!-- {{ ('0' + remainingTime[box.key]) | slice:-2 }}-->
+              </div>
+              <div appFitText [group]="'dayGroup'">{{ box.key }}</div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-template>
+    <div class="pb-1">
+      <button class="flat-button" (click)="clearCountdown()">Reset</button>
+    </div>
+  </div>
+</ng-template>

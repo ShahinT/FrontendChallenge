@@ -1,0 +1,30 @@
+<div>
+  <form (ngSubmit)="onSubmit()" class="form">
+    <input
+      type="text"
+      [(ngModel)]="countDown.eventName"
+      name="eventName"
+      placeholder="Event Name"
+      required
+    >
+    <div class="error-container">
+      <span *ngIf="errorMessage && !isValidEventName(countDown.eventName)">
+        Event name must be at least 3 characters.
+      </span>
+    </div>
+
+    <input
+      type="datetime-local"
+      [(ngModel)]="countDown.endDate"
+      name="endDate"
+      required
+    >
+    <div class="error-container">
+      <span *ngIf="errorMessage && !isValidEndDate(countDown.endDate)">
+        End date must be a valid future date.
+      </span>
+    </div>
+
+    <button class="flat-button" type="submit">Start Countdown</button>
+  </form>
+</div>
